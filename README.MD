@@ -1,0 +1,155 @@
+// 1.通过长度创建
+var buffer = Buffer.alloc
+(100); // 相对这种方法比较耗性
+能
+
+var buffer = Buffer.from([ ] ||
+“”);// 会自动把10进制转化成
+16进制
+
+
+//1)fill方法
+var buffer =
+Buffer.allocUnsafe(100);
+buffer.fill(0);
+
+//2)slice方法 （截取，克隆：深(
+递归循环,parse(stringify)),浅
+(slice assign,{...{}})）
+// 深拷贝 就是两个人长的一样但
+是毫无关系，浅拷贝就是两个对
+象中存放的空间是一样的
+
+var newBuffer = buffer.slice
+(0,1); // 拷贝出来的存放的是内
+存地址空间
+
+
+// 拷贝buffer(copy)
+//targetBuffer目标buffer,
+targetStart目标的开始,
+sourceStart源的开始,
+sourceEnd源的结束 this.length
+buf1.copy(buf,0);
+
+Buffer.concat(）
+
+// isBuffer判断当前是不是
+buffer类型
+Buffer.isBuffer(buff)
+
+// fileSystem 文件系统 文件的
+读写
+let fs = require('fs');
+// 既有同步又有异步方法，异步
+有callback
+
+// 同步的读取
+// 1.读取文件 文件必须存在。不
+能通过/读取内容 /表示的是根目
+录
+// 2.读取的默认类型是buffer
+let result = fs.readFileSync
+('3.fs.js','utf8');
+
+// 调用all方法后 会返回一个新的
+promise的实例
+/*Promise.all([read
+('x.txt','utf8'),read
+('y.txt','utf8')]).then(function
+(data) { //data是一个数组类型
+对应的是和前面请求的顺序相同
+（会把成功后的结果放到数组中
+），假如说有一个失败了，就走
+错误
+    console.log(data);
+}).catch(err=>{});*/
+
+// promise解决的问题 1.回调地
+狱 2.合并异步的返回结果
+3.async，await 简化promise写
+法的 （语法糖）
+
+// 如果程序 只开始执行一次 可以
+同步。readFile会把内容读到内
+存中，用这种方式会导致淹没可
+用内存。
+
+// 读取都是类型都是buffer 写入
+的时候utf8
+// 读取的文件必须存在，写的时
+候文件不存在会自动创建，里面
+有内容会覆盖掉
+// 默认会调用toString方法
+
+fs.writeFileSync
+('1.txt','{name:1,age:2}');
+
+
+//带sync是同步 readFileSync +
+writeFileSync
+
+
+/*fs.stat('/',function
+(err,stats) {
+    if(err){/!*文件不存在*!/}
+    console.log(stats.isFile());
+//判断是不是文件
+    console.log
+(stats.isDirectory()); // 判断是
+不是文件夹
+});*/
+
+let path = require('path');
+// 拼一个路径出来
+console.log(path.join
+(__dirname, './a','./b'));
+// 解析一个绝对路径出来
+console.log(path.resolve
+('./a','./b'));
+
+
+// 发布订阅
+let EventEmitter = require
+('events');
+
+util.inherits
+(Girl,EventEmitter); // {'失恋':
+[cry,eat]}继承
+
+// removeListener once on
+emit
+
+
+// 流 可读流和可写流
+// 流：边读边写 不是疯狂的读
+
+// highWaterMark 每次能读取
+多少 默认64k我们默认不需要更
+改
+// 读取默认时buffer类型
+
+// 需要监听事件 数据到来的事件
+rs.emit('data',数据);
+// 默认叫非流动模式 => 流动模
+式
+let rs = fs.createReadStream
+('1.txt',{highWaterMark:1});
+
+rs.on('data',function (chunk)
+{}）
+ rs.pause(); // 暂停 暂停是on
+('data')的触发
+rs.resume(); // 恢复data事件的
+触发
+
+// 默认data事件是不停的触发，
+直到文件中的数据全部读出来
+rs.on('end',function () {}）
+
+rs.on('err',function (err) {
+    // 文件不存在 错误
+});
+
+// on('data') on('err') on
+('end') resume() pause()
